@@ -1,0 +1,23 @@
+@import './utilities/stylesService.scss';
+.tableContainer {
+  @include table-container-style('true', 'left', 'dark', '50vw');
+  display: flex;
+  flex-direction: row;
+  width: min-content;
+  background-color: inherit;
+  td {
+    max-width: 8vw;
+  }
+  :nth-child(n){
+    margin: 5px;
+  }
+  :nth-child(1) {
+    width: max-content;
+  }
+}
+.App {
+  text-align: center;
+  height: 100%;
+  width: max-content;
+  background-color: #f5f5f5;
+}
