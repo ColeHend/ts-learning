@@ -1,9 +1,9 @@
-import { tableOptions } from "../../models/generatedTable.model";
+// require imports are for the react table generator
+// npm i @material-ui/core @mui/icons-material @mui/material @mui/styled-engine-sc sass typescript
 import { exampleOptions } from "./tableTools/exampleTable";
 import GeneratedTable from "./tableTools/tableService";
-import config from "../../models/tableConfig.model";
-import props from "./tableService.model";
-
+import config from "./tableConfig.model";
+import props from "./tableTools/tableService.model";
 
 export default class TableService {
     constructor(private tableOptions: props) {

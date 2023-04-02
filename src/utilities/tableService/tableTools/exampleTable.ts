@@ -1,4 +1,4 @@
-import props from "../tableService.model";
+import props from "./tableService.model";
 export const exampleOptions:props = {
     data: {
       value: [],

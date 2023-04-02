@@ -2,12 +2,11 @@ import React from 'react';
 import './App.scss';
 import TableService from './utilities/tableService/tableServiceUtility';
 import { exampleOptions } from './utilities/tableService/tableTools/exampleTable';
-import UtilityService from './utilities/utilityService/utilityService';
 import ExampleData from './exampleData/exampleData';
 import SpellCollapse from './components/spellCollapse';
 import person from './models/person';
 import spell from './models/spell';
-import config from './models/tableConfig.model';
+import config from './utilities/tableService/tableConfig.model';
 function App() {
   const tableService = React.useMemo(() => new TableService(exampleOptions), []);
   const exampleData = new ExampleData();

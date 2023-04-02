@@ -11,7 +11,7 @@ import CustomTableCell from "./tableCell";
 import "../tableService.scss";
 import SearchBar from "./searchbar";
 import CustomTableRow from "./tableRow";
-import props from "../tableService.model";
+import props from "./tableService.model";
 
 
 export default function GenerateTable(props: props) {
