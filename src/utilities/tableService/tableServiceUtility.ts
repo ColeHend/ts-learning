@@ -20,13 +20,13 @@ export default class TableService {
             this.tableOptions.body.row.endValue = newColumn.value;
         }
         if (search && collapsible) {
-            this.setCoreOptions(key_name, state.tableData, collapsible,search);
+            this.setCoreOptions(key_name, state, collapsible,search);
         }else if (collapsible && !search) {
-            this.setCoreOptions(key_name, state.tableData, collapsible);
+            this.setCoreOptions(key_name, state, collapsible);
         }  else if (search && !collapsible) {
-            this.setCoreOptions(key_name, state.tableData, undefined,search);
+            this.setCoreOptions(key_name, state, undefined,search);
         } else {
-            this.setCoreOptions(key_name, state.tableData);
+            this.setCoreOptions(key_name, state);
         }
             
         if (table) {
@@ -35,12 +35,15 @@ export default class TableService {
         return GeneratedTable(this.tableOptions);
     }
 
-    private setCoreOptions(key_name: Array<[string, string]>, data: Array<Object>, collapsible?: any ,search?: any) {
+    private setCoreOptions(key_name: Array<[string, string]>, data: any, collapsible?: any ,search?: any) {
+        const { tableData, setTableData } = data;
         key_name.forEach((key, index) => {
             this.tableOptions.data.keys[index] = key[0];
             this.tableOptions.header.cell.value[index] = key[1];
         });
-        this.tableOptions.data.value = data;
+        this.tableOptions.data.value = data.tableData;
+        this.tableOptions.state.tableData = tableData;
+        this.tableOptions.state.setTableData = setTableData;
         if (collapsible) {
             this.tableOptions.options.collapsible = collapsible;
         }

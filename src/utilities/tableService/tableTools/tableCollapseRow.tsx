@@ -3,8 +3,7 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import ArrowCircleDownTwoToneIcon from '@mui/icons-material/ArrowCircleDownTwoTone';
-import ArrowCircleUpTwoToneIcon from '@mui/icons-material/ArrowCircleUpTwoTone';
+import { PropsWithChildren } from "react";
 
 interface props {
   styleClass?: string;
@@ -14,30 +13,32 @@ interface props {
   data: any;
   row: any;
   index: number;
-  value: any;
+  value?: any;
 }
 
-function CustomTableCollapsibleRow(prop:props) {
+function CustomTableCollapsibleRow(prop: PropsWithChildren<props>) {
     const [open, setOpen] = React.useState(false);
-    const { styleClass, collapseValue, header, body, data } = prop;
+    const {  collapseValue, header, body, data } = prop;
     return (
       <>
         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
           {header.row.beginValue ? header.row.beginValue() : null}
           <TableCell
-            style={{ width: "min-content" }}
-            sx={{ ...body.cell.style.sx, width: "min-content"}}
+          style={{width:'min-content'}}
+            sx={{ ...body.cell.style.sx, width: "min-content" }}
             id="collapse_arrow_table_def" 
           >
             <IconButton
               aria-label="expand row"
               size="small"
+              style={{width:'50%'}}
               onClick={() => setOpen(!open)}
             >
-              {open ? <ArrowCircleUpTwoToneIcon /> : <ArrowCircleDownTwoToneIcon />}
+              {/* {open ? <ArrowCircleUpTwoToneIcon /> : <ArrowCircleDownTwoToneIcon />} */}
+              {open ? '▲' : '▼'}
             </IconButton>
           </TableCell>
-          {prop.value}
+          {prop.children ?? prop.value ?? null}
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={data.keys.length+1}>

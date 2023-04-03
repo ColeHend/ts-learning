@@ -20,9 +20,11 @@ export default function GenerateTable(props: props) {
   const ariaLabel = options.collapsible ? "collapsible table" : "simple table";
   const { tableData, setTableData } = props.state;
   const copy = (obj:Object) => JSON.parse(JSON.stringify(obj));
-  const [allTableData] = React.useState(copy(props.state.tableData));
-  // let tableData = data.value;
-  // const setTableData = (data) => {tableData = data};
+  const [allTableData] = React.useState(copy(data.value));
+  console.log("allTableData", allTableData)
+  console.log("tableData", tableData)
+  console.log("props", props);
+  
   const columnLength = options.collapsible ? data.keys.length + 1 : data.keys.length;
   return (
     <TableContainer
@@ -55,12 +57,16 @@ export default function GenerateTable(props: props) {
             </TableRow>
           ) : null}
           <CustomTableRow
-            value={
-              <>
+            value={undefined}
+            styleClass={`${header.styleClass}`}
+          >
+             <>
                 {header.row.beginValue ? header.row.beginValue() : null}
+
                 {options.collapsible ? (
-                  <TableCell></TableCell>
+                  <TableCell style={{width:'min-content'}}></TableCell>
                 ) : null}
+
                 {header.cell.value.map((key, index) => (
                   <CustomTableCell
                     key={`key ${key} index ${index}`}
@@ -69,17 +75,15 @@ export default function GenerateTable(props: props) {
                     value={String(key)}
                   />
                 ))}
-                <>
+                
                   {header.row.endValue?<TableCell style={{width:'min-content'}}>
                     {typeof header.row.endValue === "string"
                       ? header.row.endValue
                       : "Nothing"}
                   </TableCell>:null}
-                </>
+                
               </>
-            }
-            styleClass={`${header.styleClass}`}
-          />
+          </CustomTableRow>
           <TableRow></TableRow>
         </TableHead>
         <TableBody>
@@ -93,7 +97,8 @@ export default function GenerateTable(props: props) {
                   header={header}
                   body={body}
                   data={data}
-                  value={<>
+                  collapseValue={options.collapsible?.collapseValue}                  >
+                    <>
                     {data.keys.map((key, index) => (
                       <CustomTableCell
                         key={`key ${key} index ${index}`}
@@ -104,15 +109,16 @@ export default function GenerateTable(props: props) {
                     {body.row.endValue ? <TableCell style={{ width: 'min-content' }}>
                       {body.row.endValue(row)}
                     </TableCell> : null}
-                  </>}
-                  collapseValue={options.collapsible?.collapseValue} />
+                  </>
+                  </CustomTableCollapsibleRow>
               );
             })
             : tableData.map((row:any, index) => (
                 <CustomTableRow
                   key={`${index} ${JSON.stringify(row)}`}
-                  value={
-                    <>
+                  styleClass={`${body.row.style.class}`}
+                >
+                  <>
                       {data.keys.map((key) => (
                         <CustomTableCell
                           key={`key ${key} index ${index}`}
@@ -127,9 +133,7 @@ export default function GenerateTable(props: props) {
                       </TableCell>:null
                       }
                     </>
-                  }
-                  styleClass={`${body.row.style.class}`}
-                />
+                </CustomTableRow>
               ))}
         </TableBody>
       </Table>

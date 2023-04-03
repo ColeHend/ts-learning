@@ -1,6 +1,6 @@
 export default interface config {
     key_name: [string,string][];
-    state: { tableData: Object[]; setTableData: any };
+    state: { tableData: any[]; setTableData: any };
     collapsible?: {
         styleClass: string;
         collapseValue: (row:any,index:number)=>any;

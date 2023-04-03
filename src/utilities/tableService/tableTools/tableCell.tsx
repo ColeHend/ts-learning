@@ -6,12 +6,12 @@ interface props {
     sx?: Object;
 }
 
-function CustomTableCell (props:props) {
+function CustomTableCell (props:React.PropsWithChildren<props>) {
     return (
         <TableCell
             className={props.styleClass}
             sx={props.sx}>
-            {props.value}
+            {props.children ?? props.value ?? null}
         </TableCell>
     );
 };
