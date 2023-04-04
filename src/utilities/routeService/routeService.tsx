@@ -24,7 +24,7 @@ function RouteService(props: PropsWithChildren<props>) {
     const childrenNumber: number = children.filter((child: any) => child.tabname).length;
     const boxSX = props.style?.box.sx ?? { display: 'flex', alignItems: 'center', textAlign: 'center', background: 'inherit' }
     return (
-        <div>
+        <>
             {childrenNumber > 0 ?
                 (
                     <Box sx={boxSX}>
@@ -50,10 +50,9 @@ function RouteService(props: PropsWithChildren<props>) {
                 ) : null
             }
             <Routes>
-                {/* {daChildren} */}
                 {children.map((route: customRoute) => (<Route {...route}></Route>))}
             </Routes>
-        </div>
+        </>
     );
 };
 

@@ -4,25 +4,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import IconChoice from "./navtools/barIcon";
-// import Settingsbutton from "./navtools/settingsButton";
-import SettingsLinkButton from "./navtools/buttons/settingsLinkButton";
-import NavLinkButton from "./navtools/buttons/navLinkButton";
 import UserAvatar from "./navtools/row/avatarView";
 import SettingsRow from "./navtools/row/settingRow";
 import NavRow from "./navtools/row/navRow";
 import NavLinkRow from "./navtools/row/navLinkRow";
-import { ThemeProvider, createTheme, ThemeOptions } from '@mui/material/styles';
-// import NavButton from "./navtools/navButton";
-import dark from './navtools/themes/dark';
-import light from './navtools/themes/light';
 
 const defaultPages: page[] = [{ page: "Home", toLink: "/" }, { page: "People", toLink: "/people" }, { page: "Spells", toLink: "/spell" }];
 const defaultSettings: setting[] = [{ setting: "Home", toLink: "/" }];
@@ -46,19 +34,9 @@ interface props {
     iconName?: "droid" | "castle";
     theme?: string;
 }
-function getTheme(theme: "dark" | "light" | string ) {
-    switch (theme) {
-        case "dark":
-            return dark;
-        case "light":
-            return light;
-        default:
-            return light;
-    }
-}
+
 export default function NavbarService(props: props) {
     
-    const theTheme = createTheme(getTheme(props.theme ?? "light"));
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const [userAvatar, setuserAvatar] = React.useState({
@@ -91,7 +69,6 @@ export default function NavbarService(props: props) {
         setAnchorElUser(null);
     };
     return (
-        <ThemeProvider theme={theTheme}>
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
@@ -157,6 +134,5 @@ export default function NavbarService(props: props) {
                     </Toolbar>
                 </Container>
             </AppBar>
-        </ThemeProvider>
     );
 }

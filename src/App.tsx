@@ -9,6 +9,7 @@ import spell from './models/spell';
 import config from './utilities/tableService/tableConfig.model';
 import RouteService, { customRoute } from './utilities/routeService/routeService';
 import NavbarService from './utilities/navbarService/navbarService';
+import CustomTheme from './utilities/muiThemes/customTheme';
 function App() {
   const tableService = React.useMemo(() => new TableService(exampleOptions), []);
   const exampleData = new ExampleData();
@@ -39,34 +40,28 @@ function App() {
   const [showAvatar] = React.useState(true);
   const [avatarLink] = React.useState(undefined);
   const [siteName] = React.useState("My crazy Test Site.");
-  const [theme] = React.useState("light");
   //--------------Route Service------------------
   const routeArr: customRoute[] = [
-    { path: 'spell', element: <div className='tableContainer'>{tableService.generateTable(spellConfig)}</div>},
-    { path: 'people', element: <div className='tableContainer'>{tableService.generateTable(peopleConfig)}</div>},
+    { path: 'spell', element: <div className='tableContainer'>{tableService.generateTable(spellConfig)}</div> },
+    { path: 'people', element: <div className='tableContainer'>{tableService.generateTable(peopleConfig)}</div>, tabname: 'People' },
   ]
-  const routeStyle = {
-    box: {
-      sx: { display: 'flex', alignItems: 'center', textAlign: 'center', backgroundColor: '#f00', width: '100%' }
-    },
-    button: {
-      sx: { color: 'black' }
-    }
-  }
   //--------------Render------------------
+  const [theme] = React.useState("dark");
   return (
-    <div className="App" style={{ width: '100vw', height: '100vh' }}>
-      <NavbarService siteName={siteName} iconName='castle' theme={theme} pages={[
-        { page: 'Home', toLink: '/' },
-        { page: 'People', toLink: '/people' },
-        { page: 'Spells', toLink: '/spell' }
-      ]} settings={[
-        { setting: 'Home', toLink: '/' },
-        { setting: 'People', toLink: '/people' },
-        { setting: 'Spells', toLink: '/spell' }
-      ]} userAvatar={{ shouldShow: showAvatar, link: avatarLink }} />
-      <RouteService style={routeStyle} routes={routeArr} />
-    </div>
+    <CustomTheme theme={'dark'}>
+      <div className="App" style={{ width: '100vw', height: '100vh' }}>
+        <NavbarService siteName={siteName} iconName='castle' theme={theme} pages={[
+          { page: 'Home', toLink: '/' },
+          { page: 'People', toLink: '/people' },
+          { page: 'Spells', toLink: '/spell' }
+        ]} settings={[
+          { setting: 'Home', toLink: '/' },
+          { setting: 'People', toLink: '/people' },
+          { setting: 'Spells', toLink: '/spell' }
+        ]} userAvatar={{ shouldShow: showAvatar, link: avatarLink }} />
+        <RouteService routes={routeArr} />
+      </div>
+    </CustomTheme>
   );
 }
 
