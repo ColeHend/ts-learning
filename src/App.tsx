@@ -9,7 +9,7 @@ import spell from './models/spell';
 import config from './utilities/tableService/tableConfig.model';
 import RouteService, { customRoute } from './utilities/routeService/routeService';
 import NavbarService from './utilities/navbarService/navbarService';
-import CustomTheme from './utilities/muiThemes/customTheme';
+import CustomTheme from './utilities/customThemes/customTheme';
 function App() {
   const tableService = React.useMemo(() => new TableService(exampleOptions), []);
   const exampleData = new ExampleData();
